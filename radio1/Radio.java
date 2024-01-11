@@ -46,10 +46,14 @@ public class Radio implements IRadio{
         throw new UnsupportedOperationException("Unimplemented method 'selectStation'");
     }
 
+    /**
+     * @description Método que se encarga de cambiar el estado del radio, si esta apagado lo enciende y viceversa
+     * @return boolean
+     */
     @Override
     public void switchOnOff() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'switchOnOff'");
+        if(on) on = false;
+        else on = true;
     }
 
     @Override
