@@ -13,7 +13,7 @@ public class Radio implements IRadio{
 
     public Radio(){
         this.on = false;
-        this.am = false;
+        this.am = true;
         this.stationSelected = 0;
         this.AMbuttons = new double[12];
         this.FMbuttons = new double[12];
@@ -25,10 +25,13 @@ public class Radio implements IRadio{
         throw new UnsupportedOperationException("Unimplemented method 'saveStation'");
     }
 
+    /**
+     * @description Método que informa si el radio está en AM o FM
+     * @return boolean
+     */
     @Override
     public boolean isAM() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isAM'");
+        return am;
     }
 
     /**
