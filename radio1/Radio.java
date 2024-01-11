@@ -59,10 +59,14 @@ public class Radio implements IRadio{
         else on = true;
     }
 
+    /**
+     * @description Método que se encarga de cambiar la frecuencia del radio, varia entre AM y FM
+     * @return boolean
+     */
     @Override
     public void switchAMFM() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'switchAMFM'");
+        if(am) am = false;
+        else am = true;
     }
 
     @Override
