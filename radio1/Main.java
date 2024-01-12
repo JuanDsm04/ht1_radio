@@ -15,6 +15,7 @@ public class Main {
             System.out.println("\n-------- RADIO --------");
             System.out.println("1. Encender/Apagar");
             System.out.println("2. Cambiar AM/FM");
+            System.out.println("3. Siguiente estación");
             System.out.print("Elige una de las opciones: ");
             String opcion = sc.nextLine();
             switch (opcion) {
@@ -39,6 +40,13 @@ public class Main {
                     }
                     break;
                     
+                case "3":
+                    if(radio.isOn()){
+                        System.out.println(radio.nextStation());
+                    }else{
+                        System.out.println("Primero debes encender la radio");
+                    }
+                break;
                 default:
                     System.out.println("Ingresa una opción válida");
                     break;
