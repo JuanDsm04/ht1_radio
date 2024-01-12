@@ -69,9 +69,19 @@ public class Radio implements IRadio{
         else am = true;
     }
 
+    /**
+     * @description Método que se encarga de cambiar la estación del radio, una vez alcanzado el máximo regresa al principio
+     * @return double
+     */
     @Override
     public double nextStation() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'nextStation'");
+        if(isAM()){
+            if(stationSelected==1610) stationSelected = 530;
+            else stationSelected +=10;
+        }else{
+            if(stationSelected==107.9) stationSelected = 87.9;
+            else stationSelected +=0.2;
+        }
+        return stationSelected;
     }
 }
