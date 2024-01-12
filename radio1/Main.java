@@ -33,8 +33,8 @@ public class Main {
                 case "2":
                     if (radio.isOn()){
                         radio.switchAMFM();
-                        if(radio.isAM()) System.out.println("Frencuencia AM");
-                        else System.out.println("Frecuencia FM");
+                        if(radio.isAM()) System.out.println("Frencuencia AM" + "\nEstación actual: 530");
+                        else System.out.println("Frecuencia FM" + "\nEstación actual: 87.9");
                     } else {
                         System.out.println("Primero debes encender la radio");
                     }

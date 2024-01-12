@@ -14,7 +14,7 @@ public class Radio implements IRadio{
     public Radio(){
         this.on = false;
         this.am = true;
-        this.stationSelected = 0;
+        this.stationSelected = 530;
         this.AMbuttons = new double[12];
         this.FMbuttons = new double[12];
     }
@@ -65,8 +65,13 @@ public class Radio implements IRadio{
      */
     @Override
     public void switchAMFM() {
-        if(am) am = false;
-        else am = true;
+        if(am) {
+            am = false;
+            stationSelected = 87.9;
+        } else {
+            am = true;
+            stationSelected = 530;
+        }
     }
 
     /**
