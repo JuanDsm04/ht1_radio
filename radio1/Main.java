@@ -15,23 +15,21 @@ public class Main {
             int buttonNumber;
             String button;
             System.out.println("\n-------- RADIO --------");
-            System.out.println("1. Encender/Apagar");
+            System.out.println("1. Encender la radio");
             System.out.println("2. Cambiar AM/FM");
             System.out.println("3. Siguiente emisora");
             System.out.println("4. Guardar emisora actual");
             System.out.println("5. Seleccionar una emisora guardada");
+            System.out.println("6. Apagar la radio");
             System.out.print("Elige una de las opciones: ");
             String opcion = sc.nextLine();
             switch (opcion) {
                 case "1":
-                    radio.switchOnOff();
-                    if(radio.isOn()){
+                    if(!radio.isOn()){
+                        radio.switchOnOff();
                         System.out.println("Radio encendida");
-                        if(radio.isAM()) System.out.println("Frencuencia actual: AM");
-                        else System.out.println("Frecuencia actual: FM");
-                    } else {
-                        System.out.println("Radio apagada");
-                    }
+                        System.out.println("Frencuencia AM" + "\nEmisora actual: 530");
+                    } else System.out.println("La radio ya esta encendida");
                     break;
                 
                 case "2":
@@ -89,7 +87,16 @@ public class Main {
                             System.out.println("Debe ingresar un valor númerico válido");
                         }
                     } else {
-                        System.out.println("Primer debes encender la radio");
+                        System.out.println("Primero debes encender la radio");
+                    }
+                    break;
+                case "6":
+                    if(radio.isOn()){
+                        radio.switchOnOff();
+                        System.out.println("Radio apagada");
+                        repeat = false;
+                    }else{
+                        System.out.println("La radio ya esta apagada"); 
                     }
                     break;
 
