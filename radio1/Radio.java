@@ -27,10 +27,10 @@ public class Radio implements IRadio{
     public void saveStation(int buttonId, double station) {
         if(am) {
             AMbuttons[buttonId - 1] = station;
-            System.out.println("Emisora " + currentStation + " guardada en el botón " + buttonId + " de la frecuencia AM");
+            System.out.println("Emisora " + (int)currentStation + " guardada en el botón " + buttonId + " de la frecuencia AM");
         } else {
             FMbuttons[buttonId - 1] = station;
-            System.out.println("Emisora " + currentStation + " guardada en el botón " + buttonId + " de la frecuencia FM");
+            System.out.println("Emisora " + String.format("%.1f",currentStation) + " guardada en el botón " + buttonId + " de la frecuencia FM");
         }
     }
 

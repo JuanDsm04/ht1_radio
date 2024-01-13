@@ -44,7 +44,8 @@ public class Main {
                     
                 case "3":
                     if(radio.isOn()){
-                        System.out.println("Emisora actual: " + radio.nextStation());
+                        if(radio.isAM()) System.out.println("Emisora actual: " + (int)radio.nextStation());
+                        else System.out.println("Emisora actual: " + String.format("%.1f",radio.nextStation()));
                     }else{
                         System.out.println("Primero debes encender la radio");
                     }
@@ -77,11 +78,11 @@ public class Main {
                         button = sc.nextLine();
                         try {
                             buttonNumber = Integer.parseInt(button);
-                            if (buttonNumber >= 1 && buttonNumber <= 12) {
-                                System.out.println("Emisora actual: " + radio.selectStation(buttonNumber));
-                            } else {
-                                System.out.println("Debe ingresar un número entre 1 y 12");
+                            if (buttonNumber >= 1 && buttonNumber <= 12){
+                                if(radio.isAM()) System.out.println("Emisora actual: " + (int)radio.selectStation(buttonNumber));
+                                else System.out.println("Emisora actual: " + String.format("%.1f",radio.selectStation(buttonNumber)));
                             }
+                            else System.out.println("Debe ingresar un número entre 1 y 12");
 
                         } catch (Exception e) {
                             System.out.println("Debe ingresar un valor númerico válido");
