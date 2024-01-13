@@ -27,10 +27,10 @@ public class Radio implements IRadio{
     public void saveStation(int buttonId, double station) {
         if(am) {
             AMbuttons[buttonId - 1] = station;
-            System.out.println("Estación " + currentStation + " guardada en el botón " + buttonId + " de la frecuencia AM");
+            System.out.println("Emisora " + currentStation + " guardada en el botón " + buttonId + " de la frecuencia AM");
         } else {
             FMbuttons[buttonId - 1] = station;
-            System.out.println("Estación " + currentStation + " guardada en el botón " + buttonId + " de la frecuencia FM");
+            System.out.println("Emisora " + currentStation + " guardada en el botón " + buttonId + " de la frecuencia FM");
         }
     }
 
@@ -52,10 +52,26 @@ public class Radio implements IRadio{
         return on;
     }
 
+    /**
+     * @description Método que se encarga de seleccionar la estación anteriormente guardada en un botón de AM o FM
+     * @return double
+     */
     @Override
     public double selectStation(int buttonId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'selectStation'");
+        if(am) {
+            if (AMbuttons[buttonId - 1] != 0){
+                currentStation = AMbuttons[buttonId - 1];
+            } else {
+                System.out.println("El botón aún no tiene una emisora guardada, se permanecera en la misma emisora");
+            }
+        } else {
+            if (FMbuttons[buttonId - 1] != 0){
+                currentStation = FMbuttons[buttonId - 1];
+            } else {
+                System.out.println("El botón aún no tiene una emisora guardada, se permanecera en la misma emisora");
+            }
+        }
+        return currentStation;
     }
 
     /**
