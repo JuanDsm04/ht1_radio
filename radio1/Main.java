@@ -16,6 +16,7 @@ public class Main {
             System.out.println("1. Encender/Apagar");
             System.out.println("2. Cambiar AM/FM");
             System.out.println("3. Siguiente estación");
+            System.out.println("4. Guardar estación actual");
             System.out.print("Elige una de las opciones: ");
             String opcion = sc.nextLine();
             switch (opcion) {
@@ -42,11 +43,33 @@ public class Main {
                     
                 case "3":
                     if(radio.isOn()){
-                        System.out.println(radio.nextStation());
+                        System.out.println("Estación actual: " + radio.nextStation());
                     }else{
                         System.out.println("Primero debes encender la radio");
                     }
-                break;
+                    break;
+
+                case "4":
+                    if(radio.isOn()){
+                        System.out.print("Ingrese el número de botón para guardar la estación (1-12): ");
+                        String button = sc.nextLine();
+                        try {
+                            int buttonNumber = Integer.parseInt(button);
+                            if (buttonNumber >= 1 && buttonNumber <= 12) {
+                                radio.saveStation(buttonNumber, radio.getCurrentStation());
+                            } else {
+                                System.out.println("Debe ingresar un número entre 1 y 12");
+                            }
+
+                        } catch (Exception e) {
+                            System.out.println("Debe ingresar un valor númerico válido");
+                        }
+
+                    }else{
+                        System.out.println("Primero debes encender la radio");
+                    }
+                    break;
+
                 default:
                     System.out.println("Ingresa una opción válida");
                     break;

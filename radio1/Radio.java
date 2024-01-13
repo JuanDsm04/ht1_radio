@@ -7,22 +7,31 @@
 public class Radio implements IRadio{
     private boolean on;
     private boolean am;
-    private double stationSelected;
+    private double currentStation;
     private double[] AMbuttons;
     private double[] FMbuttons;
 
     public Radio(){
         this.on = false;
         this.am = true;
-        this.stationSelected = 530;
+        this.currentStation = 530;
         this.AMbuttons = new double[12];
         this.FMbuttons = new double[12];
     }
 
+    /**
+     * @description Método que guarda el número de la estación actual en uno de los 12 botones de AM o FM
+     * @return void
+     */
     @Override
     public void saveStation(int buttonId, double station) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveStation'");
+        if(am) {
+            AMbuttons[buttonId - 1] = station;
+            System.out.println("Estación " + currentStation + " guardada en el botón " + buttonId + " de la frecuencia AM");
+        } else {
+            FMbuttons[buttonId - 1] = station;
+            System.out.println("Estación " + currentStation + " guardada en el botón " + buttonId + " de la frecuencia FM");
+        }
     }
 
     /**
@@ -51,7 +60,7 @@ public class Radio implements IRadio{
 
     /**
      * @description Método que se encarga de cambiar el estado del radio, si esta apagado lo enciende y viceversa
-     * @return boolean
+     * @return void
      */
     @Override
     public void switchOnOff() {
@@ -61,16 +70,16 @@ public class Radio implements IRadio{
 
     /**
      * @description Método que se encarga de cambiar la frecuencia del radio, varia entre AM y FM
-     * @return boolean
+     * @return void
      */
     @Override
     public void switchAMFM() {
         if(am) {
             am = false;
-            stationSelected = 87.9;
+            currentStation = 87.9;
         } else {
             am = true;
-            stationSelected = 530;
+            currentStation = 530;
         }
     }
 
@@ -81,12 +90,20 @@ public class Radio implements IRadio{
     @Override
     public double nextStation() {
         if(isAM()){
-            if(stationSelected==1610) stationSelected = 530;
-            else stationSelected +=10;
+            if(currentStation==1610) currentStation = 530;
+            else currentStation +=10;
         }else{
-            if(stationSelected==107.9) stationSelected = 87.9;
-            else stationSelected +=0.2;
+            if(currentStation==107.9) currentStation = 87.9;
+            else currentStation +=0.2;
         }
-        return stationSelected;
+        return currentStation;
+    }
+
+    /**
+     * @description Retorna la estación actual del radio
+     * @return La estación actual del radio
+     */
+    public double getCurrentStation() {
+        return currentStation;
     }
 }
