@@ -11,6 +11,9 @@ public class Radio implements IRadio{
     private double[] AMbuttons;
     private double[] FMbuttons;
 
+    /*
+     * Constuctor de la clase Radio. Inicializa una nueva instancia de Radio con valores predeterminados
+     */
     public Radio(){
         this.on = false;
         this.am = true;
@@ -121,5 +124,13 @@ public class Radio implements IRadio{
      */
     public double getCurrentStation() {
         return currentStation;
+    }
+
+    /**
+     * @description Actualiza el valor de la estación de la radio
+     * @param currentStation El nuevo valor double para la estación
+     */
+    public void setCurrentStation(double currentStation) {
+        this.currentStation = currentStation;
     }
 }
