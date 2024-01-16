@@ -1,136 +1,134 @@
 /**
- * @author Diego Flores
- * @creationDate 10/01/2024
- * @description Clase encargada de llevar el control de las funcionalidades del radio
+ * @author Nils Muralles & Víctor Pérez
+ * @version 1.0.0
+ * @since 12/01/24
+ * Clase radio que implementa las funcionalidades de la interfaz
  */
 
-public class Radio2 implements IRadio2{
-    private boolean on;
-    private boolean am;
+public class Radio2 implements IRadio2 {
+    private boolean stateOnOff;
+    private boolean stateAMFM;
+    private double[] AMButtons;
+    private double[] FMButtons;
     private double currentStation;
-    private double[] AMbuttons;
-    private double[] FMbuttons;
-
-    /*
-     * Constuctor de la clase Radio. Inicializa una nueva instancia de Radio con valores predeterminados
-     */
-    public Radio2(){
-        this.on = false;
-        this.am = true;
-        this.currentStation = 530;
-        this.AMbuttons = new double[12];
-        this.FMbuttons = new double[12];
-    }
 
     /**
-     * @description Método que guarda el número de la estación actual en uno de los 12 botones de AM o FM
-     * @return void
+     * Constructor de Radio
      */
-    @Override
-    public void saveStation(int buttonId, double station) {
-        if(am) {
-            AMbuttons[buttonId - 1] = station;
-            System.out.println("Emisora " + (int)currentStation + " guardada en el botón " + buttonId + " de la frecuencia AM");
-        } else {
-            FMbuttons[buttonId - 1] = station;
-            System.out.println("Emisora " + String.format("%.1f",currentStation) + " guardada en el botón " + buttonId + " de la frecuencia FM");
-        }
+    public Radio2() {
+        AMButtons = new double[12];
+        FMButtons = new double[12];
+        stateOnOff = false;
+        stateAMFM = true;
+        this.currentStation = 530.0;
     }
 
-    /**
-     * @description Método que informa si el radio está en AM o FM
-     * @return boolean
-     */
-    @Override
-    public boolean isAM() {
-        return am;
-    }
 
     /**
-     * @description Método que informa si el radio esta encendido o apagado
-     * @return boolean
-     */
-    @Override
-    public boolean isOn() {
-        return on;
-    }
-
-    /**
-     * @description Método que se encarga de seleccionar la estación anteriormente guardada en un botón de AM o FM
-     * @return double
-     */
-    @Override
-    public double selectStation(int buttonId) {
-        if(am) {
-            if (AMbuttons[buttonId - 1] != 0){
-                currentStation = AMbuttons[buttonId - 1];
-            } else {
-                System.out.println("El botón aún no tiene una emisora guardada, se permanecera en la misma emisora");
-            }
-        } else {
-            if (FMbuttons[buttonId - 1] != 0){
-                currentStation = FMbuttons[buttonId - 1];
-            } else {
-                System.out.println("El botón aún no tiene una emisora guardada, se permanecera en la misma emisora");
-            }
-        }
-        return currentStation;
-    }
-
-    /**
-     * @description Método que se encarga de cambiar el estado del radio, si esta apagado lo enciende y viceversa
-     * @return void
-     */
-    @Override
-    public void switchOnOff() {
-        if(on) on = false;
-        else on = true;
-    }
-
-    /**
-     * @description Método que se encarga de cambiar la frecuencia del radio, varia entre AM y FM
-     * @return void
-     */
-    @Override
-    public void switchAMFM() {
-        if(am) {
-            am = false;
-            currentStation = 87.9;
-        } else {
-            am = true;
-            currentStation = 530;
-        }
-    }
-
-    /**
-     * @description Método que se encarga de cambiar la estación del radio, una vez alcanzado el máximo regresa al principio
-     * @return double
-     */
-    @Override
-    public double nextStation() {
-        if(isAM()){
-            if(currentStation==1610) currentStation = 530;
-            else currentStation +=10;
-        }else{
-            if(currentStation==107.9) currentStation = 87.9;
-            else currentStation +=0.2;
-        }
-        return currentStation;
-    }
-
-    /**
-     * @description Retorna la estación actual del radio
-     * @return La estación actual del radio
+     * @return Estación actual de la radio
      */
     public double getCurrentStation() {
         return currentStation;
     }
 
+
     /**
-     * @description Actualiza el valor de la estación de la radio
-     * @param currentStation El nuevo valor double para la estación
+     * Modifica la estación actual de la radio
+     * @param currentStation Nueva estación
      */
     public void setCurrentStation(double currentStation) {
         this.currentStation = currentStation;
+    }
+
+
+    /**
+     * Guarda una estación en un botón
+     * @param buttonID Número del botón
+     * @param station Estación a guardar
+     */
+    @Override
+    public void saveStation(int buttonID, double station) {
+        if (this.isAM()) {
+            this.AMButtons[buttonID - 1] = station;
+
+        } else {
+            this.FMButtons[buttonID - 1] = station;
+        }
+    }
+
+    @Override
+    public boolean isAM() {
+        return stateAMFM;
+    }
+
+    @Override
+    public boolean isOn() {
+        return stateOnOff;
+    }
+
+    /**
+     * Selecciona una estación previamente guardada
+     * @param buttonID ID del botón seleccionado por el usuario
+     * @return Estación seleccionada
+     */
+    @Override
+    public double selectStation(int buttonID) {
+        if (this.isAM()) {
+            return AMButtons[buttonID-1];
+        } else {
+            return FMButtons[buttonID-1];
+        }
+    }
+
+    /**
+     * Enciende o apaga la radio
+     */
+    @Override
+    public void switchOnOff() {
+        if (!isOn()) {
+            stateOnOff = true;
+        } else {
+            stateOnOff = false;
+        }
+    }
+
+    /**
+     * Cambia el modo de la radio entre AM y FM
+     */
+    @Override
+    public void switchAMFM() {
+        if (this.isOn()) {
+            if (this.isAM()) {
+                stateAMFM = false;
+
+            } else {
+                stateAMFM = true;
+            }
+        }
+    }
+
+    /**
+     * Cambia de estación en función de si es AM o FM
+     * @return currentStation: Estación en la que se encuentra el radio
+     */
+    @Override
+    public double nextStation() {
+        if (this.isOn()) {
+            if(this.isAM()){
+                if(currentStation < 1610.0){
+                    currentStation +=10;
+                } else {
+                    currentStation = 530.0;
+                }
+
+            } else {
+                if(currentStation <107.9){
+                    currentStation +=0.2;
+                } else {
+                    currentStation = 87.9;
+                }
+            }
+        }
+        return currentStation;
     }
 }
