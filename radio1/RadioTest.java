@@ -5,8 +5,6 @@
  * de la clase Radio
  */
  import org.junit.*;
-
-
  
 public class RadioTest {
 
@@ -20,7 +18,7 @@ public class RadioTest {
         Radio radio = new Radio();
         radio.setCurrentStation(1610);
         double station = radio.nextStation();
-        Assert.assertEquals("Al llegar a la última emisora de la frecuencia AM, se regresa a la emisora 530", 
+        Assert.assertEquals("Al llegar a la última emisora de la frecuencia AM, la emisora deberia regresar a la 530", 
         530.0, station, 0.0);
     }
 
@@ -35,7 +33,7 @@ public class RadioTest {
         radio.switchAMFM();
         radio.setCurrentStation(107.9);
         double station = radio.nextStation();
-        Assert.assertEquals("Al llegar a la última emisora del rango FM, debe regresar a la primera emisora", 
+        Assert.assertEquals("Al llegar a la última emisora del rango FM, deberia regresarse a la primera emisora", 
         87.9, station, 0.0);
     }
 
@@ -56,8 +54,7 @@ public class RadioTest {
     }
 
     /**
-    * @description Prueba encargada de preveer si la estacion guardada
-    * es unica y no se intercala con la primer estación
+    * @description Prueba encargada de comprobar que las estaciones se guardan correctamente en los botones
     * (La prueba está hecha para fallar)
     */
     @Test
@@ -66,6 +63,6 @@ public class RadioTest {
         radio.switchAMFM();
         radio.saveStation(1, 94.9);
         double station = radio.selectStation(1);
-        Assert.assertEquals(87.9, station, 0.0);
+        Assert.assertEquals("La estación guardada debería ser la 94.9", 87.9, station, 0.0);
     }
 }
